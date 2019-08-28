@@ -22,21 +22,9 @@ function islandora_openseadragon_admin(array $form, array &$form_state) {
   module_load_include('inc', 'islandora_openseadragon', 'includes/utilities');
   $settings = islandora_openseadragon_get_settings(FALSE);
   $version = islandora_openseadragon_get_installed_version();
-  $imageserver_settings = islandora_imageserver_get_settings();
 
   $form = array(
-    'islandora_openseadragon_tilesource' => array(
-      '#type' => 'select',
-      '#title' => t('Image Server'),
-      '#description' => t('The image server to use with OpenSeadragon, configure at Admin -> Islandora -> Image server configuration'),
-      '#default_value' => $imageserver_settings['type'],
-      '#disabled' => TRUE,
-      '#options' => array(
-        'none' => t('No image server configured'),
-        'iiif' => t('IIIF image server'),
-        'djatoka' => t('Adore-Djatoka image server'),
-      ),
-    ),
+    'islandora_openseadragon_tilesource' => islandora_imageserver_get_type_selectbox(),
     'islandora_openseadragon_fit_to_aspect_ratio' => array(
       '#type' => 'checkbox',
       '#title' => t('Constrain image to viewport'),
